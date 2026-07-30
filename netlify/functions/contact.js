@@ -1,8 +1,8 @@
 const nodemailer = require('nodemailer');
 
-module.exports = async (req, res) => {
-  if (req.method !== 'POST') {
-    return res.status(405).send('Method not allowed');
+exports.handler = async (event) => {
+  if (event.httpMethod !== 'POST') {
+    return { statusCode: 405, body: 'Method not allowed' };
   }
 
   const transporter = nodemailer.createTransport({
@@ -14,13 +14,14 @@ module.exports = async (req, res) => {
   });
 
   let body = {};
-  if (typeof req.body === 'string') {
-    req.body.split('&').forEach(pair => {
+  const ct = event.headers['content-type'] || '';
+  if (ct.includes('application/json')) {
+    try { body = JSON.parse(event.body); } catch (e) { body = {}; }
+  } else {
+    (event.body || '').split('&').forEach(pair => {
       const [key, val] = pair.split('=').map(decodeURIComponent);
       body[key] = val;
     });
-  } else {
-    body = req.body || {};
   }
 
   const recipient = body._recipient || process.env.FORM_EMAIL_USER;
@@ -48,25 +49,28 @@ module.exports = async (req, res) => {
       `,
     });
 
-    res.setHeader('Content-Type', 'text/html; charset=utf-8');
-    res.status(200).send(`
-      <!DOCTYPE html>
-      <html lang="en">
-      <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-      <title>Thank You</title>
-      <script src="https://cdn.tailwindcss.com" defer></script>
-      </head>
-      <body class="bg-gray-50 flex items-center justify-center min-h-screen p-4">
-        <div class="text-center max-w-md mx-auto">
-          <div class="text-5xl mb-4">&#10003;</div>
-          <h1 class="text-2xl font-bold text-gray-900 mb-2">Thank You!</h1>
-          <p class="text-gray-500 mb-6">Your message has been sent. We'll get back to you within 24 hours.</p>
-          <a href="/" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition">Back to Home</a>
-        </div>
-      </body>
-      </html>
-    `);
+    return {
+      statusCode: 200,
+      headers: { 'Content-Type': 'text/html; charset=utf-8' },
+      body: `
+        <!DOCTYPE html>
+        <html lang="en">
+        <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>Thank You</title>
+        <script src="https://cdn.tailwindcss.com" defer></script>
+        </head>
+        <body class="bg-gray-50 flex items-center justify-center min-h-screen p-4">
+          <div class="text-center max-w-md mx-auto">
+            <div class="text-5xl mb-4">&#10003;</div>
+            <h1 class="text-2xl font-bold text-gray-900 mb-2">Thank You!</h1>
+            <p class="text-gray-500 mb-6">Your message has been sent. We'll get back to you within 24 hours.</p>
+            <a href="/" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition">Back to Home</a>
+          </div>
+        </body>
+        </html>
+      `
+    };
   } catch {
-    res.status(500).send('Error sending email. Please try again later.');
+    return { statusCode: 500, body: 'Error sending email. Please try again later.' };
   }
 };
