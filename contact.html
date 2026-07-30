@@ -127,6 +127,25 @@
             </div>
             <button type="submit" class="btn-primary w-full text-center">Send Message</button>
           </form>
+          <script>
+            const scriptURL = 'YOUR_WEB_APP_URL_HERE';
+            const form = document.getElementById('contact-form');
+          
+            form.addEventListener('submit', e => {
+              e.preventDefault();
+              const formData = new FormData(form);
+          
+              fetch(scriptURL, { method: 'POST', body: formData })
+                .then(() => {
+                  document.getElementById('form-status').textContent = "Thanks! We'll be in touch.";
+                  form.reset();
+                })
+                .catch(error => {
+                  document.getElementById('form-status').textContent = "Something went wrong. Please try again.";
+                  console.error('Error!', error.message);
+                });
+            });
+          </script>  
         </div>
         <div>
           <h2 class="text-2xl font-bold text-gray-900 mb-6">Contact Information</h2>
