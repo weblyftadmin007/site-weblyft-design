@@ -261,17 +261,17 @@
     .project-link:hover{gap:10px}
 
     /* TESTIMONIALS CAROUSEL */
-    .testimonial-carousel{position:relative;padding:0 10px}
-    .testimonial-track{display:flex;overflow:hidden;width:100%;margin:0;transition:transform .5s ease}
-    .testimonial-track .testimonial-card{width:100%;flex-shrink:0;box-sizing:border-box}
+    .testimonial-carousel{position:relative;padding:0 10px;overflow:hidden;max-width:780px;margin:0 auto}
+    .testimonial-track{display:flex;gap:24px;overflow:visible;width:100%;margin:0;transition:transform .5s ease}
+    .testimonial-track .testimonial-card{width:min(640px,calc(100% - 24px));flex-shrink:0;box-sizing:border-box}
     .testimonial-arrow{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;background:rgba(59,130,246,.2);border:1px solid rgba(59,130,246,.35);color:var(--c-primary);font-size:1.2rem;cursor:pointer;z-index:10;transition:all .3s;display:flex;align-items:center;justify-content:center}
     .testimonial-arrow:hover{background:rgba(59,130,246,.35);border-color:rgba(59,130,246,.5)}
-    .testimonial-arrow.prev{left:0}
-    .testimonial-arrow.next{right:0}
+    .testimonial-arrow.prev{left:-24px}
+    .testimonial-arrow.next{right:-24px}
     .testimonial-dots{display:flex;justify-content:center;gap:8px;margin-top:28px}
     .testimonial-dot{width:10px;height:10px;border-radius:50%;background:rgba(59,130,246,.45);border:none;cursor:pointer;transition:all .3s}
     .testimonial-dot.active{background:var(--c-primary);transform:scale(1.2)}
-    @media(max-width:900px){.testimonial-carousel{padding:0}.testimonial-track{width:100%}.testimonial-arrow{display:none}}
+    @media(max-width:900px){.testimonial-carousel{padding:0}.testimonial-track{width:100%;gap:16px}.testimonial-arrow{display:none}}
     .testimonial-card{
       background:rgba(0,0,0,.03);
       border:1px solid rgba(0,0,0,.08);
@@ -325,7 +325,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div id="nav-bar" class="flex justify-between items-center h-20 transition-all duration-300">
         <div class="flex items-center gap-2.5">
-          <span class="gradient-text font-display font-bold text-xl tracking-tight">Manoj Kumar</span>
+          <span class="gradient-text font-display font-bold text-xl tracking-tight">Weblyft Design</span>
         </div>
         <div class="hidden md:flex items-center gap-8">
           <a href="/" class="text-sm font-medium text-gray-500 hover:text-[var(--c-primary)] transition relative ">Home</a>
@@ -413,6 +413,36 @@
             <a href="#" target="_blank" rel="noopener noreferrer" class="project-link">View Project <svg style="width:16px;height:16px" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
           </div>
         </div>
+        <div class="card project-card animate-in delay-2">
+          <div class="project-thumb">
+            <img src="./images/project3.jpg" alt="Iron Clad Fitness" class="project-img" loading="lazy">
+            <span class="badge badge-cyan project-badge">Fitness Website</span>
+          </div>
+          <div class="project-body">
+            <h3 class="project-title">Iron Clad Fitness</h3>
+            <a href="#" target="_blank" rel="noopener noreferrer" class="project-link">View Project <svg style="width:16px;height:16px" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
+          </div>
+        </div>
+        <div class="card project-card animate-in delay-2">
+          <div class="project-thumb">
+            <img src="./images/project3.jpg" alt="Iron Clad Fitness" class="project-img" loading="lazy">
+            <span class="badge badge-cyan project-badge">Fitness Website</span>
+          </div>
+          <div class="project-body">
+            <h3 class="project-title">Iron Clad Fitness</h3>
+            <a href="#" target="_blank" rel="noopener noreferrer" class="project-link">View Project <svg style="width:16px;height:16px" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
+          </div>
+        </div>
+        <div class="card project-card animate-in delay-2">
+          <div class="project-thumb">
+            <img src="./images/project3.jpg" alt="Iron Clad Fitness" class="project-img" loading="lazy">
+            <span class="badge badge-cyan project-badge">Fitness Website</span>
+          </div>
+          <div class="project-body">
+            <h3 class="project-title">Iron Clad Fitness</h3>
+            <a href="#" target="_blank" rel="noopener noreferrer" class="project-link">View Project <svg style="width:16px;height:16px" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
+          </div>
+        </div>
         <div class="card project-card animate-in delay-3">
           <div class="project-thumb">
             <img src="./images/project4.jpg" alt="Luxe Lounge Salon" class="project-img" loading="lazy">
@@ -455,6 +485,7 @@
         <h2 class="sec-title">Kind Words</h2>
         <p class="sec-subtitle">What clients say about working with me</p>
       </div>
+      <div style="position:relative">
       <div class="testimonial-carousel">
         <div class="testimonial-track" id="testimonial-track">
           <div class="testimonial-card">
@@ -529,6 +560,7 @@
               </div>
             </div>
           </div>
+        </div>
         </div>
         <button class="testimonial-arrow prev" onclick="moveTestimonial(-1)">&#8249;</button>
         <button class="testimonial-arrow next" onclick="moveTestimonial(1)">&#8250;</button>
@@ -661,19 +693,36 @@
         }
       }
       function goTo(idx) {
+        var card = track.children[idx];
+        var carRect = track.parentElement.getBoundingClientRect();
+        var cRect = card.getBoundingClientRect();
+        var m = /translateX\((-?[\d.]+)px\)/.exec(track.style.transform || '');
+        var curTx = m ? parseFloat(m[1]) : 0;
+        var offset = (cRect.left - curTx - carRect.left) - (carRect.width - cRect.width) / 2;
+        var tx = 'translateX(' + (-offset) + 'px)';
+        if (Math.abs(idx - current) > 1) {
+          track.style.transition = 'none';
+          track.style.transform = tx;
+          track.offsetHeight;
+          track.style.transition = '';
+        } else {
+          track.style.transform = tx;
+        }
         current = idx;
-        track.style.transform = 'translateX(-' + (idx * 100) + '%)';
         var dots = dotsContainer ? dotsContainer.children : [];
         for (var i = 0; i < dots.length; i++) dots[i].className = 'testimonial-dot' + (i === current ? ' active' : '');
       }
       window.moveTestimonial = function(dir) {
         var next = current + dir;
-        if (next < 0) next = pages - 1;
-        if (next >= pages) next = 0;
+        if (next < 0 || next >= pages) return;
         goTo(next);
       };
       buildDots();
-      setInterval(function() { window.moveTestimonial(1); }, 6000);
+      goTo(0);
+      var autoTimer = setInterval(function() {
+        if (current >= pages - 1) { clearInterval(autoTimer); return; }
+        window.moveTestimonial(1);
+      }, 6000);
     })();
   </script>
 </body>

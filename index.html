@@ -244,7 +244,7 @@
     .hero-img-frame{
       position:relative;
       width:100%;
-      max-width:440px;
+      max-width:1400px;
       border-radius:var(--radius-lg);
       overflow:hidden;
       box-shadow:0 30px 60px -15px rgba(59,130,246,.25);
@@ -476,23 +476,23 @@
     @media(max-width:640px){.projects-grid{grid-template-columns:1fr}}
 
     /* TESTIMONIALS CAROUSEL */
-    .testimonial-carousel{position:relative;padding:0 10px}
-    .testimonial-track{display:flex;overflow:hidden;width:100%;margin:0;transition:transform .5s ease}
-    .testimonial-track .testimonial-card{width:100%;flex-shrink:0;box-sizing:border-box}
+    .testimonial-carousel{position:relative;padding:0 10px;overflow:hidden;max-width:780px;margin:0 auto}
+    .testimonial-track{display:flex;gap:24px;overflow:visible;width:100%;margin:0;transition:transform .5s ease}
+    .testimonial-track .testimonial-card{width:min(640px,calc(100% - 24px));flex-shrink:0;box-sizing:border-box}
     .testimonial-arrow{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);color:#fff;font-size:1.2rem;cursor:pointer;z-index:10;transition:all .3s;display:flex;align-items:center;justify-content:center}
     .testimonial-arrow:hover{background:rgba(255,255,255,.35);border-color:rgba(255,255,255,.5)}
-    .testimonial-arrow.prev{left:0}
-    .testimonial-arrow.next{right:0}
+    .testimonial-arrow.prev{left:-24px}
+    .testimonial-arrow.next{right:-24px}
     .testimonial-dots{display:flex;justify-content:center;gap:8px;margin-top:28px}
     .testimonial-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.5);border:none;cursor:pointer;transition:all .3s}
     .testimonial-dot.active{background:var(--c-accent);transform:scale(1.2)}
     .testimonial-card{
       background:rgba(255,255,255,.08);
-      border:1px solid rgba(255,255,255,.15);
+      border:2px solid rgba(255,255,255,.15);
       border-radius:var(--radius);
       padding:32px;
       position:relative;
-      transition:all .3s
+      transition:all .4s
     }
     .testimonial-card:hover{background:rgba(255,255,255,.12);transform:translateY(-4px);border-color:rgba(245,158,11,.3)}
     .testimonial-quote{
@@ -524,7 +524,7 @@
     .testimonial-role{font-size:.75rem;color:rgba(255,255,255,.55)}
     .section-dark .sec-label{color:var(--c-accent)}
     .section-dark .sec-label::before{background:var(--c-accent)}
-    @media(max-width:900px){.testimonial-carousel{padding:0}.testimonial-track{width:100%}.testimonial-arrow{display:none}}
+    @media(max-width:900px){.testimonial-carousel{padding:0}.testimonial-track{width:100%;gap:16px}.testimonial-arrow{display: none}}
 
     /* BLOG */
     .blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
@@ -692,7 +692,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div id="nav-bar" class="flex justify-between items-center h-20 transition-all duration-300">
         <div class="flex items-center gap-2.5">
-          <span class="gradient-text font-display font-bold text-xl tracking-tight">Manoj Kumar</span>
+          <span class="gradient-text font-display font-bold text-xl tracking-tight">Weblyft Design</span>
         </div>
         <div class="hidden md:flex items-center gap-8">
           <a href="/" class="text-sm font-medium text-gray-500 hover:text-[var(--c-primary)] transition relative text-[var(--c-primary)] font-semibold">Home</a>
@@ -842,15 +842,15 @@
     <div class="container">
       <div class="about-grid">
         <div class="about-img-wrap animate-in">
-          <img src="./images/project3.jpg" alt="About Manoj Kumar" class="about-img" loading="lazy">
+          <img src="./images/profile_image.jpeg" alt="About Manoj Kumar" class="about-img" loading="lazy">
           <div class="about-float">
             <div class="about-float-num">3+</div>
             <div class="about-float-label">Years of Experience</div>
           </div>
         </div>
         <div class="about-copy animate-in delay-1">
-          <span class="sec-label">About Me</span>
-          <h2 class="sec-title">Manoj Kumar - Web Design &amp; Development Agency</h2>
+          <span class="sec-label">About Us</span>
+          <h2 class="sec-title">Weblyft Design - Web Design &amp; Development Agency</h2>
           <p>Weblyft Design builds fast, affordable websites for local businesses. Custom design, no templates, transparent pricing.</p>
           <div class="about-chips">
             <span class="badge badge-primary">Custom Websites, Landing Pages, and Web Applications</span>
@@ -912,16 +912,6 @@
           </div>
           <div class="service-name">Starter — $899</div>
           <p class="service-desc">A single-page website perfect for new businesses or those needing a simple online presence fast. Includes a hero section, about, services, gallery, contact form, and mobile-responsive design. Ideal for freelancers and service providers just getting started.</p>
-          <ul class="service-features">
-            <li>Single-page design</li>
-            <li>Hero section with call-to-action</li>
-            <li>About section</li>
-            <li>Services showcase</li>
-            <li>Project gallery</li>
-            <li>Contact form with Google Apps Script integration</li>
-            <li>Mobile-responsive design</li>
-            <li>Free hosting setup</li>
-          </ul>
           <a href="/services" class="service-link">Learn more
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
           </a>
@@ -933,16 +923,6 @@
           </div>
           <div class="service-name">Professional — $1,799</div>
           <p class="service-desc">A full 5-page business website designed to build trust and showcase your expertise. Includes a homepage, about page, services page, gallery, and contact page with SEO optimization, Google Analytics integration, and Schema.org structured data for higher search rankings.</p>
-          <ul class="service-features">
-            <li>5 custom pages (home, about, services, gallery, contact)</li>
-            <li>SEO optimization</li>
-            <li>Google Analytics integration</li>
-            <li>Schema.org structured data for rich results</li>
-            <li>Contact form with email notifications</li>
-            <li>Mobile-responsive design</li>
-            <li>Free hosting setup</li>
-            <li>Delivery in 10-14 business days</li>
-          </ul>
           <a href="/services" class="service-link">Learn more
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
           </a>
@@ -954,16 +934,6 @@
           </div>
           <div class="service-name">Premium — $2,799</div>
           <p class="service-desc">Everything in Professional plus a built-in blog system to share updates, tips, and news. A powerful marketing tool that helps you connect with customers and improve your search visibility. Includes blog listing and individual post pages — perfect for businesses ready to grow.</p>
-          <ul class="service-features">
-            <li>All Professional features included</li>
-            <li>Built-in blog system</li>
-            <li>Blog listing page</li>
-            <li>Individual blog post pages</li>
-            <li>Blog category tagging</li>
-            <li>SEO-optimized blog posts</li>
-            <li>Newsletter signup integration</li>
-            <li>Priority support</li>
-          </ul>
           <a href="/services" class="service-link">Learn more
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
           </a>
@@ -1012,6 +982,35 @@
             <div class="project-name">Bella Italia</div>
           </div>
         </a>
+        <a href="https://site-dentist.weblyft-admin.workers.dev/" class="project-card animate-in delay-1" target="_blank" rel="noopener noreferrer">
+          <div class="project-media">
+            <img src="./images/project2.jpg" alt="Bella Italia" class="project-img" loading="lazy">
+            <div class="project-overlay">
+              <span class="project-overlay-text">View Project
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+              </span>
+            </div>
+          </div>
+          <div class="project-body">
+            <span class="badge badge-primary project-cat">Restaurant Website</span>
+            <div class="project-name">Bella Italia</div>
+          </div>
+        </a>
+        <a href="https://site-smoke-and-oak.weblyft-admin.workers.dev/" class="project-card animate-in delay-2" target="_blank" rel="noopener noreferrer">
+          <div class="project-media">
+            <img src="./images/project3.jpg" alt="Iron Clad Fitness" class="project-img" loading="lazy">
+            <div class="project-overlay">
+              <span class="project-overlay-text">View Project
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+              </span>
+            </div>
+          </div>
+          <div class="project-body">
+            <span class="badge badge-primary project-cat">Fitness Website</span>
+            <div class="project-name">Iron Clad Fitness</div>
+          </div>
+        </a>
+        </a>
         <a href="https://site-smoke-and-oak.weblyft-admin.workers.dev/" class="project-card animate-in delay-2" target="_blank" rel="noopener noreferrer">
           <div class="project-media">
             <img src="./images/project3.jpg" alt="Iron Clad Fitness" class="project-img" loading="lazy">
@@ -1055,6 +1054,7 @@
         <h2 class="sec-title">Kind Words From Clients</h2>
         <p class="sec-subtitle">What clients say about working with me</p>
       </div>
+      <div style="position:relative">
       <div class="testimonial-carousel">
         <div class="testimonial-track" id="testimonial-track">
           <div class="testimonial-card">
@@ -1129,6 +1129,7 @@
               </div>
             </div>
           </div>
+        </div>
         </div>
         <button class="testimonial-arrow prev" onclick="moveTestimonial(-1)">&#8249;</button>
         <button class="testimonial-arrow next" onclick="moveTestimonial(1)">&#8250;</button>
@@ -1353,19 +1354,36 @@
         }
       }
       function goTo(idx) {
+        var card = track.children[idx];
+        var carRect = track.parentElement.getBoundingClientRect();
+        var cRect = card.getBoundingClientRect();
+        var m = /translateX\((-?[\d.]+)px\)/.exec(track.style.transform || '');
+        var curTx = m ? parseFloat(m[1]) : 0;
+        var offset = (cRect.left - curTx - carRect.left) - (carRect.width - cRect.width) / 2;
+        var tx = 'translateX(' + (-offset) + 'px)';
+        if (Math.abs(idx - current) > 1) {
+          track.style.transition = 'none';
+          track.style.transform = tx;
+          track.offsetHeight;
+          track.style.transition = '';
+        } else {
+          track.style.transform = tx;
+        }
         current = idx;
-        track.style.transform = 'translateX(-' + (idx * 100) + '%)';
         var dots = dotsContainer ? dotsContainer.children : [];
         for (var i = 0; i < dots.length; i++) dots[i].className = 'testimonial-dot' + (i === current ? ' active' : '');
       }
       window.moveTestimonial = function(dir) {
         var next = current + dir;
-        if (next < 0) next = pages - 1;
-        if (next >= pages) next = 0;
+        if (next < 0 || next >= pages) return;
         goTo(next);
       };
       buildDots();
-      setInterval(function() { window.moveTestimonial(1); }, 6000);
+      goTo(0);
+      var autoTimer = setInterval(function() {
+        if (current >= pages - 1) { clearInterval(autoTimer); return; }
+        window.moveTestimonial(1);
+      }, 6000);
     })();
   </script>
 </body>
