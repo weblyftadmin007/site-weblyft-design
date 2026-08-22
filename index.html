@@ -475,17 +475,26 @@
     @media(max-width:900px){.projects-grid{grid-template-columns:repeat(2,1fr)}}
     @media(max-width:640px){.projects-grid{grid-template-columns:1fr}}
 
-    /* TESTIMONIALS */
-    .testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+    /* TESTIMONIALS CAROUSEL */
+    .testimonial-carousel{position:relative;padding:0 10px}
+    .testimonial-track{display:flex;overflow:hidden;width:100%;margin:0;transition:transform .5s ease}
+    .testimonial-track .testimonial-card{width:100%;flex-shrink:0;box-sizing:border-box}
+    .testimonial-arrow{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);color:#fff;font-size:1.2rem;cursor:pointer;z-index:10;transition:all .3s;display:flex;align-items:center;justify-content:center}
+    .testimonial-arrow:hover{background:rgba(255,255,255,.35);border-color:rgba(255,255,255,.5)}
+    .testimonial-arrow.prev{left:0}
+    .testimonial-arrow.next{right:0}
+    .testimonial-dots{display:flex;justify-content:center;gap:8px;margin-top:28px}
+    .testimonial-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.5);border:none;cursor:pointer;transition:all .3s}
+    .testimonial-dot.active{background:var(--c-accent);transform:scale(1.2)}
     .testimonial-card{
-      background:rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.1);
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.15);
       border-radius:var(--radius);
       padding:32px;
       position:relative;
       transition:all .3s
     }
-    .testimonial-card:hover{background:rgba(255,255,255,.07);transform:translateY(-4px);border-color:rgba(245,158,11,.3)}
+    .testimonial-card:hover{background:rgba(255,255,255,.12);transform:translateY(-4px);border-color:rgba(245,158,11,.3)}
     .testimonial-quote{
       font-family:Georgia,serif;
       font-size:4rem;
@@ -515,7 +524,7 @@
     .testimonial-role{font-size:.75rem;color:rgba(255,255,255,.55)}
     .section-dark .sec-label{color:var(--c-accent)}
     .section-dark .sec-label::before{background:var(--c-accent)}
-    @media(max-width:900px){.testimonials-grid{grid-template-columns:1fr}}
+    @media(max-width:900px){.testimonial-carousel{padding:0}.testimonial-track{width:100%}.testimonial-arrow{display:none}}
 
     /* BLOG */
     .blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
@@ -1046,44 +1055,85 @@
         <h2 class="sec-title">Kind Words From Clients</h2>
         <p class="sec-subtitle">What clients say about working with me</p>
       </div>
-      <div class="testimonials-grid">
-        <div class="testimonial-card animate-in">
-          <div class="testimonial-quote">&ldquo;</div>
-          <div class="testimonial-stars">★★★★★</div>
-          <p class="testimonial-text">&ldquo;Weblyft Design made the whole process easy. They listened to what we needed and delivered a beautiful site that perfectly represents our brand. Our phone has been ringing nonstop since launch.&rdquo;</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">J</div>
-            <div>
-              <div class="testimonial-name">John Smith</div>
-              <div class="testimonial-role">Owner, Smith Construction</div>
+      <div class="testimonial-carousel">
+        <div class="testimonial-track" id="testimonial-track">
+          <div class="testimonial-card">
+            <div class="testimonial-quote">&ldquo;</div>
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">&ldquo;Weblyft Design made the whole process easy. They listened to what we needed and delivered a beautiful site that perfectly represents our brand. Our phone has been ringing nonstop since launch.&rdquo;</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">J</div>
+              <div>
+                <div class="testimonial-name">John Smith</div>
+                <div class="testimonial-role">Owner, Smith Construction</div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-quote">&ldquo;</div>
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">&ldquo;Our online reservations went up 40% after Weblyft redesigned our site. Professional work, fast turnaround, and they explained everything in plain English — no technical jargon.&rdquo;</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">M</div>
+              <div>
+                <div class="testimonial-name">Marco Rossi</div>
+                <div class="testimonial-role">Owner, Bella Italia</div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-quote">&ldquo;</div>
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">&ldquo;We needed a website that could showcase our gym and handle membership inquiries. Weblyft delivered exactly that — clean, modern, and it works perfectly on mobile.&rdquo;</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">M</div>
+              <div>
+                <div class="testimonial-name">Mike Thompson</div>
+                <div class="testimonial-role">Owner, Iron Clad Fitness</div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-quote">&ldquo;</div>
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">&ldquo;Weblyft built us a site that actually brings in new patients. The online booking form alone has been a game changer. We get compliments on the design every single week.&rdquo;</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">D</div>
+              <div>
+                <div class="testimonial-name">Dr. Sarah Chen</div>
+                <div class="testimonial-role">Dentist, Downtown Dental</div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-quote">&ldquo;</div>
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">&ldquo;I tried building my own website before and it was a disaster. Weblyft Design fixed everything and gave me a site I am actually proud to share with clients. Worth every rupee.&rdquo;</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">R</div>
+              <div>
+                <div class="testimonial-name">Rajesh Patel</div>
+                <div class="testimonial-role">Founder, Oak Roofing Co</div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-quote">&ldquo;</div>
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">&ldquo;The blog feature was the reason we went premium and it was the right call. We post monthly tips and our organic traffic has tripled in three months. Absolutely recommend.&rdquo;</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">L</div>
+              <div>
+                <div class="testimonial-name">Lisa Nguyen</div>
+                <div class="testimonial-role">Marketing Director, Luxe Lounge</div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="testimonial-card animate-in delay-1">
-          <div class="testimonial-quote">&ldquo;</div>
-          <div class="testimonial-stars">★★★★★</div>
-          <p class="testimonial-text">&ldquo;Our online reservations went up 40% after Weblyft redesigned our site. Professional work, fast turnaround, and they explained everything in plain English — no technical jargon.&rdquo;</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">M</div>
-            <div>
-              <div class="testimonial-name">Marco Rossi</div>
-              <div class="testimonial-role">Owner, Bella Italia</div>
-            </div>
-          </div>
-        </div>
-        <div class="testimonial-card animate-in delay-2">
-          <div class="testimonial-quote">&ldquo;</div>
-          <div class="testimonial-stars">★★★★★</div>
-          <p class="testimonial-text">&ldquo;We needed a website that could showcase our gym and handle membership inquiries. Weblyft delivered exactly that — clean, modern, and it works perfectly on mobile.&rdquo;</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">M</div>
-            <div>
-              <div class="testimonial-name">Mike Thompson</div>
-              <div class="testimonial-role">Owner, Iron Clad Fitness</div>
-            </div>
-          </div>
-        </div>
+        <button class="testimonial-arrow prev" onclick="moveTestimonial(-1)">&#8249;</button>
+        <button class="testimonial-arrow next" onclick="moveTestimonial(1)">&#8250;</button>
       </div>
+      <div class="testimonial-dots" id="testimonial-dots"></div>
     </div>
   </section>
 
@@ -1125,72 +1175,6 @@
             <p class="blog-card-excerpt">Web hosting does not have to be confusing. Here is a plain-English guide to understanding hosting, SSL, domains, and what your website actually needs.</p>
             <div class="blog-card-meta">
               <span>February 5, 2024</span>
-              <span>5 min read</span>
-            </div>
-          </div>
-        </a>
-        <a href="/blog/website-optimization-speed-tips" class="blog-card animate-in">
-          <div class="blog-card-inner">
-            <span class="badge badge-primary blog-cat">Tips</span>
-            <h3 class="blog-card-title">10 Website Optimization Tips to Boost Your Loading Speed</h3>
-            <p class="blog-card-excerpt">A slow website costs you customers. These 10 practical tips will help your site load faster and keep visitors engaged.</p>
-            <div class="blog-card-meta">
-              <span>February 18, 2024</span>
-              <span>6 min read</span>
-            </div>
-          </div>
-        </a>
-        <a href="/blog/how-to-write-website-copy-that-converts" class="blog-card animate-in">
-          <div class="blog-card-inner">
-            <span class="badge badge-primary blog-cat">Tips</span>
-            <h3 class="blog-card-title">How to Write Website Copy That Converts Visitors Into Customers</h3>
-            <p class="blog-card-excerpt">Great design draws people in, but great copy gets them to act. Learn how to write website text that turns visitors into paying customers.</p>
-            <div class="blog-card-meta">
-              <span>March 2, 2024</span>
-              <span>5 min read</span>
-            </div>
-          </div>
-        </a>
-        <a href="/blog/seo-basics-get-found-on-google" class="blog-card animate-in">
-          <div class="blog-card-inner">
-            <span class="badge badge-primary blog-cat">Tips</span>
-            <h3 class="blog-card-title">SEO Basics: How to Get Your Website Found on Google</h3>
-            <p class="blog-card-excerpt">Search engine optimization sounds complex, but the fundamentals are simple. Here is what every business owner needs to know to rank higher.</p>
-            <div class="blog-card-meta">
-              <span>March 15, 2024</span>
-              <span>5 min read</span>
-            </div>
-          </div>
-        </a>
-        <a href="/blog/web-design-trends" class="blog-card animate-in">
-          <div class="blog-card-inner">
-            <span class="badge badge-primary blog-cat">Web Design</span>
-            <h3 class="blog-card-title">Web Design Trends 2024: What Is In and What Is Out</h3>
-            <p class="blog-card-excerpt">The web is evolving fast. Here are the design trends shaping modern websites — and the ones you should leave behind.</p>
-            <div class="blog-card-meta">
-              <span>March 28, 2024</span>
-              <span>4 min read</span>
-            </div>
-          </div>
-        </a>
-        <a href="/blog/color-psychology-in-web-design" class="blog-card animate-in">
-          <div class="blog-card-inner">
-            <span class="badge badge-primary blog-cat">Web Design</span>
-            <h3 class="blog-card-title">The Psychology of Color in Web Design: Choosing Your Brand Palette</h3>
-            <p class="blog-card-excerpt">Colors evoke emotions and shape perceptions. Learn how to choose the right color palette for your brand and website.</p>
-            <div class="blog-card-meta">
-              <span>April 10, 2024</span>
-              <span>5 min read</span>
-            </div>
-          </div>
-        </a>
-        <a href="/blog/mobile-first-design" class="blog-card animate-in">
-          <div class="blog-card-inner">
-            <span class="badge badge-primary blog-cat">Web Design</span>
-            <h3 class="blog-card-title">Mobile-First Design: Why It Matters and How to Get It Right</h3>
-            <p class="blog-card-excerpt">More than half of all web traffic comes from mobile. Designing for phones first is no longer optional — it is essential.</p>
-            <div class="blog-card-meta">
-              <span>April 22, 2024</span>
               <span>5 min read</span>
             </div>
           </div>
@@ -1346,6 +1330,42 @@
         form.style.display = 'none';
         success.style.display = 'block';
       });
+    })();
+
+    // Testimonial carousel
+    (function(){
+      var track = document.getElementById('testimonial-track');
+      var dotsContainer = document.getElementById('testimonial-dots');
+      if (!track) return;
+      var cards = track.children;
+      var perPage = 1;
+      var total = cards.length;
+      var pages = Math.ceil(total / perPage);
+      var current = 0;
+      function buildDots() {
+        if (!dotsContainer) return;
+        dotsContainer.innerHTML = '';
+        for (var i = 0; i < pages; i++) {
+          var dot = document.createElement('button');
+          dot.className = 'testimonial-dot' + (i === 0 ? ' active' : '');
+          dot.onclick = (function(idx) { return function() { goTo(idx); }; })(i);
+          dotsContainer.appendChild(dot);
+        }
+      }
+      function goTo(idx) {
+        current = idx;
+        track.style.transform = 'translateX(-' + (idx * 100) + '%)';
+        var dots = dotsContainer ? dotsContainer.children : [];
+        for (var i = 0; i < dots.length; i++) dots[i].className = 'testimonial-dot' + (i === current ? ' active' : '');
+      }
+      window.moveTestimonial = function(dir) {
+        var next = current + dir;
+        if (next < 0) next = pages - 1;
+        if (next >= pages) next = 0;
+        goTo(next);
+      };
+      buildDots();
+      setInterval(function() { window.moveTestimonial(1); }, 6000);
     })();
   </script>
 </body>

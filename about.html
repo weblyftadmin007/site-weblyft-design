@@ -330,6 +330,17 @@
     }
     .testimonial-name{font-weight:600;font-size:.9rem;color:#fff}
     .testimonial-role{font-size:.78rem;color:rgba(255,255,255,.55)}
+    .testimonial-carousel{position:relative;padding:0 10px}
+    .testimonial-track{display:flex;overflow:hidden;width:100%;margin:0;transition:transform .5s ease}
+    .testimonial-track .card{width:100%;flex-shrink:0;box-sizing:border-box}
+    .testimonial-arrow{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);color:#fff;font-size:1.2rem;cursor:pointer;z-index:10;transition:all .3s;display:flex;align-items:center;justify-content:center}
+    .testimonial-arrow:hover{background:rgba(255,255,255,.35);border-color:rgba(255,255,255,.5)}
+    .testimonial-arrow.prev{left:0}
+    .testimonial-arrow.next{right:0}
+    .testimonial-dots{display:flex;justify-content:center;gap:8px;margin-top:28px}
+    .testimonial-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.5);border:none;cursor:pointer;transition:all .3s}
+    .testimonial-dot.active{background:var(--c-accent);transform:scale(1.2)}
+    @media(max-width:900px){.testimonial-track{width:100%}.testimonial-arrow{display:none}}
 
     /* CTA */
     .cta-section{position:relative;overflow:hidden}
@@ -514,44 +525,85 @@
         <h2 class="sec-title">Kind Words From Clients</h2>
         <p class="sec-subtitle">Real feedback from people I've had the pleasure of working with</p>
       </div>
-      <div class="grid-3">
-        <div class="card card-dark testimonial-card-dark animate-in">
-          <div class="testimonial-quote-mark">&rdquo;</div>
-          <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="testimonial-text">&ldquo;Weblyft Design made the whole process easy. They listened to what we needed and delivered a beautiful site that perfectly represents our brand. Our phone has been ringing nonstop since launch.&rdquo;</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar gradient-bg-accent">J</div>
-            <div>
-              <div class="testimonial-name">John Smith</div>
-              <div class="testimonial-role">Owner, Smith Construction</div>
+      <div class="testimonial-carousel">
+        <div class="testimonial-track" id="testimonial-track">
+          <div class="card card-dark testimonial-card-dark">
+            <div class="testimonial-quote-mark">&rdquo;</div>
+            <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="testimonial-text">&ldquo;Weblyft Design made the whole process easy. They listened to what we needed and delivered a beautiful site that perfectly represents our brand. Our phone has been ringing nonstop since launch.&rdquo;</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar gradient-bg-accent">J</div>
+              <div>
+                <div class="testimonial-name">John Smith</div>
+                <div class="testimonial-role">Owner, Smith Construction</div>
+              </div>
+            </div>
+          </div>
+          <div class="card card-dark testimonial-card-dark">
+            <div class="testimonial-quote-mark">&rdquo;</div>
+            <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="testimonial-text">&ldquo;Our online reservations went up 40% after Weblyft redesigned our site. Professional work, fast turnaround, and they explained everything in plain English — no technical jargon.&rdquo;</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar gradient-bg">M</div>
+              <div>
+                <div class="testimonial-name">Marco Rossi</div>
+                <div class="testimonial-role">Owner, Bella Italia</div>
+              </div>
+            </div>
+          </div>
+          <div class="card card-dark testimonial-card-dark">
+            <div class="testimonial-quote-mark">&rdquo;</div>
+            <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="testimonial-text">&ldquo;We needed a website that could showcase our gym and handle membership inquiries. Weblyft delivered exactly that — clean, modern, and it works perfectly on mobile.&rdquo;</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar gradient-bg-accent">M</div>
+              <div>
+                <div class="testimonial-name">Mike Thompson</div>
+                <div class="testimonial-role">Owner, Iron Clad Fitness</div>
+              </div>
+            </div>
+          </div>
+          <div class="card card-dark testimonial-card-dark">
+            <div class="testimonial-quote-mark">&rdquo;</div>
+            <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="testimonial-text">&ldquo;Weblyft built us a site that actually brings in new patients. The online booking form alone has been a game changer. We get compliments on the design every single week.&rdquo;</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar gradient-bg">D</div>
+              <div>
+                <div class="testimonial-name">Dr. Sarah Chen</div>
+                <div class="testimonial-role">Dentist, Downtown Dental</div>
+              </div>
+            </div>
+          </div>
+          <div class="card card-dark testimonial-card-dark">
+            <div class="testimonial-quote-mark">&rdquo;</div>
+            <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="testimonial-text">&ldquo;I tried building my own website before and it was a disaster. Weblyft Design fixed everything and gave me a site I am actually proud to share with clients. Worth every rupee.&rdquo;</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar gradient-bg-accent">R</div>
+              <div>
+                <div class="testimonial-name">Rajesh Patel</div>
+                <div class="testimonial-role">Founder, Oak Roofing Co</div>
+              </div>
+            </div>
+          </div>
+          <div class="card card-dark testimonial-card-dark">
+            <div class="testimonial-quote-mark">&rdquo;</div>
+            <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="testimonial-text">&ldquo;The blog feature was the reason we went premium and it was the right call. We post monthly tips and our organic traffic has tripled in three months. Absolutely recommend.&rdquo;</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar gradient-bg">L</div>
+              <div>
+                <div class="testimonial-name">Lisa Nguyen</div>
+                <div class="testimonial-role">Marketing Director, Luxe Lounge</div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="card card-dark testimonial-card-dark animate-in delay-1">
-          <div class="testimonial-quote-mark">&rdquo;</div>
-          <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="testimonial-text">&ldquo;Our online reservations went up 40% after Weblyft redesigned our site. Professional work, fast turnaround, and they explained everything in plain English — no technical jargon.&rdquo;</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar gradient-bg">M</div>
-            <div>
-              <div class="testimonial-name">Marco Rossi</div>
-              <div class="testimonial-role">Owner, Bella Italia</div>
-            </div>
-          </div>
-        </div>
-        <div class="card card-dark testimonial-card-dark animate-in delay-2">
-          <div class="testimonial-quote-mark">&rdquo;</div>
-          <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="testimonial-text">&ldquo;We needed a website that could showcase our gym and handle membership inquiries. Weblyft delivered exactly that — clean, modern, and it works perfectly on mobile.&rdquo;</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar gradient-bg-accent">M</div>
-            <div>
-              <div class="testimonial-name">Mike Thompson</div>
-              <div class="testimonial-role">Owner, Iron Clad Fitness</div>
-            </div>
-          </div>
-        </div>
+        <button class="testimonial-arrow prev" onclick="moveTestimonial(-1)">&#8249;</button>
+        <button class="testimonial-arrow next" onclick="moveTestimonial(1)">&#8250;</button>
       </div>
+      <div class="testimonial-dots" id="testimonial-dots"></div>
     </div>
   </section>
 
@@ -661,15 +713,40 @@
     </div>
   </footer>
   <script>
-    const nav = document.getElementById('main-nav');
-    window.addEventListener('scroll', () => {
-      if (!nav) return;
-      if (window.scrollY > 20) {
-        nav.classList.add('nav-scrolled');
-      } else {
-        nav.classList.remove('nav-scrolled');
+    // Testimonial carousel
+    (function(){
+      var track = document.getElementById('testimonial-track');
+      var dotsContainer = document.getElementById('testimonial-dots');
+      if (!track) return;
+      var perPage = 1;
+      var total = track.children.length;
+      var pages = Math.ceil(total / perPage);
+      var current = 0;
+      function buildDots() {
+        if (!dotsContainer) return;
+        dotsContainer.innerHTML = '';
+        for (var i = 0; i < pages; i++) {
+          var dot = document.createElement('button');
+          dot.className = 'testimonial-dot' + (i === 0 ? ' active' : '');
+          dot.onclick = (function(idx) { return function() { goTo(idx); }; })(i);
+          dotsContainer.appendChild(dot);
+        }
       }
-    });
+      function goTo(idx) {
+        current = idx;
+        track.style.transform = 'translateX(-' + (idx * 100) + '%)';
+        var dots = dotsContainer ? dotsContainer.children : [];
+        for (var i = 0; i < dots.length; i++) dots[i].className = 'testimonial-dot' + (i === current ? ' active' : '');
+      }
+      window.moveTestimonial = function(dir) {
+        var next = current + dir;
+        if (next < 0) next = pages - 1;
+        if (next >= pages) next = 0;
+        goTo(next);
+      };
+      buildDots();
+      setInterval(function() { window.moveTestimonial(1); }, 6000);
+    })();
   </script>
 </body>
 </html>
