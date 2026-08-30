@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://weblyft-design.pages.dev/sitemap.xml
