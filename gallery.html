@@ -164,6 +164,8 @@
       .sec-title{font-size:1.75rem}
       .stat-num{font-size:2rem}
     }
+    .newsletter-error{display:none;font-size:.8125rem;font-weight:500;color:#fca5a5;margin-top:6px;text-align:center}
+    .newsletter-error.visible{display:block}
   </style>
   <style>
     /* PAGE HERO */
@@ -583,12 +585,12 @@
     <div class="container mx-auto px-4 text-center relative">
       <h3 class="font-display text-2xl font-bold text-white mb-3">Stay Updated</h3>
       <p class="text-white/70 mb-8 text-sm max-w-md mx-auto">Get tips, news, and exclusive offers delivered to your inbox.</p>
-      <iframe name="newsletter-frame" id="newsletter-frame" style="display:none"></iframe>
-      <form id="newsletter-form" name="Newsletter" method="POST" action="https://script.google.com/macros/s/AKfycbyasWsFggtairGCu9pc43P1uk-LuPKyQiZZIH5qJq3vM0dEqHCJoG1Se328R-5VhGQTPw/exec" target="newsletter-frame" class="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
+      <form id="newsletter-form" name="Newsletter" method="POST" action="https://script.google.com/macros/s/AKfycbyasWsFggtairGCu9pc43P1uk-LuPKyQiZZIH5qJq3vM0dEqHCJoG1Se328R-5VhGQTPw/exec" class="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
         <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;opacity:0;height:0;width:0;pointer-events:none">
         <input type="email" name="email" placeholder="Your email address" required class="flex-1 px-5 py-3.5 rounded-xl text-sm border-0 outline-none bg-white/15 text-white placeholder-white/60 backdrop-blur-sm focus:bg-white/25 transition">
         <button type="submit" class="bg-white font-semibold px-8 py-3.5 rounded-xl text-sm hover:bg-white/90 transition whitespace-nowrap" style="color:var(--c-primary)">Subscribe</button>
       </form>
+      <p class="newsletter-error" id="newsletter-error">Please enter a valid email address.</p>
       <p class="text-white/50 text-xs mt-4">No spam. Unsubscribe anytime.</p>
       <div id="newsletter-success" style="display:none" class="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-lg mx-auto">
         <div class="flex items-center gap-2 text-white font-medium">
@@ -599,12 +601,25 @@
       <script>
         (function(){
           var form = document.getElementById('newsletter-form');
-          var frame = document.getElementById('newsletter-frame');
           var success = document.getElementById('newsletter-success');
-          if (!form || !frame || !success) return;
-          frame.addEventListener('load', function() {
-            form.style.display = 'none';
-            success.style.display = 'block';
+          var nlErr = document.getElementById('newsletter-error');
+          if (!form || !success) return;
+          form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            var emailInput = form.querySelector('input[type="email"]');
+            var emailOk = emailInput && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value.trim());
+            if(nlErr) nlErr.classList.toggle('visible', !emailOk);
+            if(!emailOk){ emailInput?.focus(); return; }
+            try {
+              var formData = new FormData(form);
+              var data = Object.fromEntries(formData.entries());
+              await fetch(form.action, { method: 'POST', mode: 'no-cors', body: new URLSearchParams(data) });
+              form.style.display = 'none';
+              success.style.display = 'flex';
+            } catch (err) {
+              form.submit();
+              setTimeout(function() { form.style.display = 'none'; success.style.display = 'flex'; }, 1500);
+            }
           });
         })();
       </script>
