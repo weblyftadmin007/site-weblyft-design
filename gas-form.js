@@ -19,9 +19,9 @@ function doPost(e) {
     ])
     const body = `Name: ${d.name}\nEmail: ${d.email}\nSubject: ${d.subject}\nMessage: ${d.message}`
     MailApp.sendEmail(YOUR_EMAIL, 'New enquiry', body)
-    return HtmlService.createHtmlOutput(
-      '<html><body style="font-family:sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;gap:1rem"><p style="font-size:1.2rem">Message sent. You can close this tab.</p><a href="https://weblyft-design.pages.dev" style="font-size:1rem;color:#2563eb;text-decoration:none">Return to website</a></body></html>'
-    )
+    return ContentService.createTextOutput(JSON.stringify({success:true}))
+      .setMimeType(ContentService.MimeType.JSON)
+      .setHeader('Access-Control-Allow-Origin','*');
   } catch (err) {
     return ContentService
       .createTextOutput(JSON.stringify({ error: err.toString() }))

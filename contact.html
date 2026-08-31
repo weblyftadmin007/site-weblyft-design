@@ -284,6 +284,37 @@
       .form-row{grid-template-columns:1fr}
       .form-card{padding:28px}
     }
+
+    /* FORM VALIDATION */
+    .field-error{
+      display:none;
+      font-size:.8125rem;
+      font-weight:500;
+      color:#dc2626;
+      margin-top:6px;
+      line-height:1.4
+    }
+    .field-error.visible{display:block}
+    .form-input.field-invalid{
+      border-color:#dc2626;
+      box-shadow:0 0 0 3px rgba(220,38,38,.1)
+    }
+    .form-input.field-invalid:focus{
+      border-color:#dc2626;
+      box-shadow:0 0 0 4px rgba(220,38,38,.15)
+    }
+    .form-input.field-valid{
+      border-color:#16a34a
+    }
+    .newsletter-error{
+      display:none;
+      font-size:.8125rem;
+      font-weight:500;
+      color:#fca5a5;
+      margin-top:6px;
+      text-align:center
+    }
+    .newsletter-error.visible{display:block}
   </style>
 </head>
 <body>
@@ -353,26 +384,27 @@
         <div class="card form-card animate-in">
           <h2 style="font-family:var(--font-display);font-size:1.5rem;font-weight:700;color:var(--c-text);letter-spacing:-.02em;margin-bottom:8px">Send Me a Message</h2>
           <p style="color:var(--c-muted);margin-bottom:28px">Fill out the form below and I'll get back to you within 24 hours.</p>
-          <iframe name="hidden-frame" id="hidden-frame" style="display:none"></iframe>
-          <form id="contact-form" name="Contact" method="POST" action="https://script.google.com/macros/s/AKfycbyasWsFggtairGCu9pc43P1uk-LuPKyQiZZIH5qJq3vM0dEqHCJoG1Se328R-5VhGQTPw/exec" target="hidden-frame">
+          <form id="contact-form" name="Contact" method="POST" action="https://script.google.com/macros/s/AKfycbyasWsFggtairGCu9pc43P1uk-LuPKyQiZZIH5qJq3vM0dEqHCJoG1Se328R-5VhGQTPw/exec">
             <div class="form-row">
               <div class="form-group">
                 <label class="form-label" for="cf-name">Your Name</label>
                 <input type="text" id="cf-name" name="name" required class="form-input" placeholder="John Doe">
+                <p class="field-error" id="err-name">Please enter your name (at least 2 characters).</p>
               </div>
               <div class="form-group">
                 <label class="form-label" for="cf-email">Your Email</label>
                 <input type="email" id="cf-email" name="email" required class="form-input" placeholder="john@example.com">
+                <p class="field-error" id="err-email">Please enter a valid email address.</p>
               </div>
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="cf-subject">Subject</label>
-              <input type="text" id="cf-subject" name="subject" class="form-input" placeholder="What's this about?">
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="cf-message">Message</label>
-              <textarea id="cf-message" name="message" rows="6" required class="form-input" placeholder="Tell me about your project..."></textarea>
-            </div>
+            </div>              <div class="form-group">
+                <label class="form-label" for="cf-subject">Subject</label>
+                <input type="text" id="cf-subject" name="subject" class="form-input" placeholder="What's this about?">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="cf-message">Message</label>
+                <textarea id="cf-message" name="message" rows="6" required class="form-input" placeholder="Tell me about your project..."></textarea>
+                <p class="field-error" id="err-message">Please enter a message (at least 10 characters).</p>
+              </div>
             <button type="submit" class="btn-primary shimmer-button" style="width:100%">Send Message</button>
           </form>
         </div>
@@ -444,12 +476,12 @@
     <div class="container mx-auto px-4 text-center relative">
       <h3 class="font-display text-2xl font-bold text-white mb-3">Stay Updated</h3>
       <p class="text-white/70 mb-8 text-sm max-w-md mx-auto">Get tips, news, and exclusive offers delivered to your inbox.</p>
-      <iframe name="newsletter-frame" id="newsletter-frame" style="display:none"></iframe>
-      <form id="newsletter-form" name="Newsletter" method="POST" action="https://script.google.com/macros/s/AKfycbyasWsFggtairGCu9pc43P1uk-LuPKyQiZZIH5qJq3vM0dEqHCJoG1Se328R-5VhGQTPw/exec" target="newsletter-frame" class="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
+      <form id="newsletter-form" name="Newsletter" method="POST" action="https://script.google.com/macros/s/AKfycbyasWsFggtairGCu9pc43P1uk-LuPKyQiZZIH5qJq3vM0dEqHCJoG1Se328R-5VhGQTPw/exec" class="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
         <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;opacity:0;height:0;width:0;pointer-events:none">
         <input type="email" name="email" placeholder="Your email address" required class="flex-1 px-5 py-3.5 rounded-xl text-sm border-0 outline-none bg-white/15 text-white placeholder-white/60 backdrop-blur-sm focus:bg-white/25 transition">
         <button type="submit" class="bg-white font-semibold px-8 py-3.5 rounded-xl text-sm hover:bg-white/90 transition whitespace-nowrap" style="color:var(--c-primary)">Subscribe</button>
       </form>
+      <p class="newsletter-error" id="newsletter-error">Please enter a valid email address.</p>
       <p class="text-white/50 text-xs mt-4">No spam. Unsubscribe anytime.</p>
       <div id="newsletter-success" style="display:none" class="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-lg mx-auto">
         <div class="flex items-center gap-2 text-white font-medium">
@@ -460,12 +492,32 @@
       <script>
         (function(){
           var form = document.getElementById('newsletter-form');
-          var frame = document.getElementById('newsletter-frame');
           var success = document.getElementById('newsletter-success');
-          if (!form || !frame || !success) return;
-          frame.addEventListener('load', function() {
-            form.style.display = 'none';
-            success.style.display = 'block';
+          if (!form || !success) return;
+          var nlError = document.getElementById('newsletter-error');
+          form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            var emailInput = form.querySelector('input[type="email"]');
+            var emailOk = emailInput && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value.trim());
+            if(nlError) nlError.classList.toggle('visible', !emailOk);
+            if(!emailOk){ emailInput?.focus(); return; }
+            try {
+              var formData = new FormData(form);
+              var data = Object.fromEntries(formData.entries());
+              await fetch(form.action, {
+                method: 'POST',
+                mode: 'no-cors',
+                body: new URLSearchParams(data)
+              });
+              form.style.display = 'none';
+              success.style.display = 'flex';
+            } catch (err) {
+              form.submit();
+              setTimeout(function() {
+                form.style.display = 'none';
+                success.style.display = 'flex';
+              }, 1500);
+            }
           });
         })();
       </script>
@@ -525,21 +577,82 @@
   </footer>
 
   <script>
-    const form = document.getElementById('contact-form');
-    const hiddenFrame = document.getElementById('hidden-frame');
-    const popup = document.getElementById('success-popup');
+    /* ── Validation helpers ── */
+    function validateName(v){ return v.trim().length >= 2 }
+    function validateEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) }
+    function validateMessage(v){ return v.trim().length >= 10 }
 
-    form?.addEventListener('submit', () => {
+    function showError(id, show){
+      const el = document.getElementById(id);
+      if(el){ el.classList.toggle('visible', show) }
+    }
+    function markInvalid(input, errorId, valid){
+      input.classList.toggle('field-invalid', !valid);
+      showError(errorId, !valid);
+    }
+
+    /* ── Contact form ── */
+    const form = document.getElementById('contact-form');
+    const popup = document.getElementById('success-popup');
+    const nameInput = document.getElementById('cf-name');
+    const emailInput = document.getElementById('cf-email');
+    const msgInput = document.getElementById('cf-message');
+
+    // Real-time validation on blur
+    nameInput?.addEventListener('blur', ()=> markInvalid(nameInput,'err-name', validateName(nameInput.value)));
+    emailInput?.addEventListener('blur', ()=> markInvalid(emailInput,'err-email', validateEmail(emailInput.value)));
+    msgInput?.addEventListener('blur', ()=> markInvalid(msgInput,'err-message', validateMessage(msgInput.value)));
+
+    // Clear error on input
+    nameInput?.addEventListener('input', ()=>{ if(validateName(nameInput.value)){ markInvalid(nameInput,'err-name',true) }});
+    emailInput?.addEventListener('input', ()=>{ if(validateEmail(emailInput.value)){ markInvalid(emailInput,'err-email',true) }});
+    msgInput?.addEventListener('input', ()=>{ if(validateMessage(msgInput.value)){ markInvalid(msgInput,'err-message',true) }});
+
+    form?.addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      // Run all validations
+      const nameOk = validateName(nameInput?.value||'');
+      const emailOk = validateEmail(emailInput?.value||'');
+      const msgOk = validateMessage(msgInput?.value||'');
+      markInvalid(nameInput,'err-name', nameOk);
+      markInvalid(emailInput,'err-email', emailOk);
+      markInvalid(msgInput,'err-message', msgOk);
+
+      if(!nameOk || !emailOk || !msgOk){
+        // Scroll to first error
+        const firstInvalid = form.querySelector('.field-invalid');
+        if(firstInvalid) firstInvalid.scrollIntoView({behavior:'smooth',block:'center'});
+        return;
+      }
+
       const btn = form.querySelector('button[type="submit"]');
       if (btn) { btn.dataset.original = btn.textContent; btn.disabled = true; btn.textContent = 'Sending...'; }
-    });
 
-    hiddenFrame?.addEventListener('load', () => {
-      popup?.classList.add('active');
-      form?.reset();
-      const btn = form && form.querySelector('button[type="submit"]');
-      if (btn) { btn.disabled = false; btn.textContent = btn.dataset.original || 'Send Message'; }
-      setTimeout(() => { popup?.classList.remove('active'); }, 4000);
+      try {
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+        await fetch(form.action, {
+          method: 'POST',
+          mode: 'no-cors',
+          body: new URLSearchParams(data)
+        });
+        popup?.classList.add('active');
+        form.reset();
+        // Clear validation states
+        [nameInput,emailInput,msgInput].forEach(i=>{ if(i){i.classList.remove('field-invalid','field-valid')}});
+        ['err-name','err-email','err-message'].forEach(id=>showError(id,false));
+        if (btn) { btn.disabled = false; btn.textContent = btn.dataset.original || 'Send Message'; }
+        setTimeout(() => { popup?.classList.remove('active'); }, 4000);
+      } catch (err) {
+        form.submit();
+        setTimeout(() => {
+          popup?.classList.add('active');
+          form.reset();
+          if (btn) { btn.disabled = false; btn.textContent = btn.dataset.original || 'Send Message'; }
+          setTimeout(() => { popup?.classList.remove('active'); }, 4000);
+        }, 1500);
+      }
     });
 
     const animateEls = document.querySelectorAll('.animate-in');
