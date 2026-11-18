@@ -1,4 +1,4 @@
-# robots.txt for https://weblyft-design.pages.dev
+# robots.txt for https://site-weblyft-design.weblyftt.workers.dev
 # Search engines and AI answer retrieval crawlers are allowed so pages can be
 # indexed, shown in AI answers and cited. A named user-agent group overrides
 # the * group, so keep these groups complete.
@@ -28,4 +28,4 @@ Allow: /
 # User-agent: GPTBot
 # Disallow: /
 
-Sitemap: https://weblyft-design.pages.dev/sitemap.xml
+Sitemap: https://site-weblyft-design.weblyftt.workers.dev/sitemap.xml
