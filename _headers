@@ -1,4 +1,4 @@
-# Cloudflare Pages header rules for https://site-weblyft-design.weblyftt.workers.dev
+# Cloudflare Pages header rules for https://weblyftgo.online
 # Docs: https://developers.cloudflare.com/pages/configuration/headers/
 #
 # One rule per path pattern, header lines indented under it. Rules are additive: a
