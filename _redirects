@@ -1,0 +1,57 @@
+# Cloudflare Pages redirect rules for https://weblyft-design.pages.dev
+# Docs: https://developers.cloudflare.com/pages/configuration/redirects/
+#
+# Why these exist: Pages serves every page at two URLs - /services.html and
+# /services - and returns 200 for both. Every canonical, Open Graph URL,
+# internal link and sitemap entry on the site uses the .html form, so the
+# extensionless form is the duplicate and gets 301'd to it. That concentrates
+# crawl budget and link signals on one URL per page instead of two.
+#
+# If you would rather use the clean form (/services), that is the better long-term
+# choice, but it is not a redirect change: swap the direction of every rule below
+# and rewrite the canonical, og:url and sitemap entries on all 22 pages in the
+# same pass, so the redirect and the canonical agree.
+#
+# Rules are first-match-wins, so keep the specific paths above any wildcard you
+# add later. A path that matches nothing here falls through to the static asset.
+
+# Home: the canonical is "/", not "/index.html"
+/index.html / 301
+
+# Top-level pages
+/services /services.html 301
+/websites /websites.html 301
+/chatbots /chatbots.html 301
+/aeo-geo /aeo-geo.html 301
+/gallery /gallery.html 301
+/about /about.html 301
+/contact /contact.html 301
+/privacy /privacy.html 301
+/terms /terms.html 301
+/blog /blog.html 301
+
+# Guides. Listed individually rather than with a /blog/:slug splat, because a
+# splat would also match the already-.html URLs and redirect
+# /blog/mobile-first-design.html to /blog/mobile-first-design.html.html.
+/blog/color-psychology-in-web-design /blog/color-psychology-in-web-design.html 301
+/blog/how-to-choose-the-right-website-platform /blog/how-to-choose-the-right-website-platform.html 301
+/blog/how-to-write-website-copy-that-converts /blog/how-to-write-website-copy-that-converts.html 301
+/blog/mobile-first-design /blog/mobile-first-design.html 301
+/blog/seo-basics-get-found-on-google /blog/seo-basics-get-found-on-google.html 301
+/blog/ultimate-guide-to-building-a-business-website /blog/ultimate-guide-to-building-a-business-website.html 301
+/blog/web-design-trends /blog/web-design-trends.html 301
+/blog/website-hosting-explained /blog/website-hosting-explained.html 301
+/blog/website-optimization-speed-tips /blog/website-optimization-speed-tips.html 301
+/blog/what-is-aeo-and-geo /blog/what-is-aeo-and-geo.html 301
+
+# Trailing-slash variants, in case a link somewhere carries one
+/services/ /services.html 301
+/websites/ /websites.html 301
+/chatbots/ /chatbots.html 301
+/aeo-geo/ /aeo-geo.html 301
+/gallery/ /gallery.html 301
+/about/ /about.html 301
+/contact/ /contact.html 301
+/privacy/ /privacy.html 301
+/terms/ /terms.html 301
+/blog/ /blog.html 301

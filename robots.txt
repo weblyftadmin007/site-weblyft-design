@@ -1,0 +1,31 @@
+# robots.txt for https://weblyft-design.pages.dev
+# Search engines and AI answer retrieval crawlers are allowed so pages can be
+# indexed, shown in AI answers and cited. A named user-agent group overrides
+# the * group, so keep these groups complete.
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+# Everything else, including ordinary search crawlers
+User-agent: *
+Allow: /
+
+# Training crawlers (GPTBot, ClaudeBot, Google-Extended, CCBot) are not
+# blocked above. That is an owner decision, not a technical one: to opt out,
+# add an explicit Disallow group for each of them here.
+# User-agent: GPTBot
+# Disallow: /
+
+Sitemap: https://weblyft-design.pages.dev/sitemap.xml

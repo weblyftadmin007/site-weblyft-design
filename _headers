@@ -1,0 +1,55 @@
+# Cloudflare Pages header rules for https://weblyft-design.pages.dev
+# Docs: https://developers.cloudflare.com/pages/configuration/headers/
+#
+# One rule per path pattern, header lines indented under it. Rules are additive: a
+# request matching several patterns inherits all of them, and if the same header is
+# set twice Cloudflare joins the values with a comma. That is fine for
+# X-Robots-Tag but wrong for Cache-Control, where a browser reads the first max-age
+# it finds - so Cache-Control is set in exactly one place per file type below, and
+# HTML has no rule at all: Pages already sends "public, max-age=0, must-revalidate"
+# for HTML, which is the correct policy for pages that change on every deploy.
+
+/*
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: SAMEORIGIN
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+
+# Caching. None of these filenames contain a content hash, so the policy is
+# "long, but replaceable": 30 days for images and fonts, one hour for the
+# stylesheet, both with a stale-while-revalidate window so a returning visitor
+# sees the old file once while the new one is fetched. If the build ever starts
+# fingerprinting filenames (style.9f3c1a.css, red-oak-roofing.9f3c1a.webp),
+# change both of these to "public, max-age=31536000, immutable" - that is the
+# only case where a one-year immutable cache is safe.
+/images/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=604800
+
+/fonts/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=604800
+
+/style.css
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+
+/chat-loader.js
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+
+/sitemap.xml
+  Content-Type: application/xml; charset=utf-8
+
+/robots.txt
+  Content-Type: text/plain; charset=utf-8
+
+# Content-Security-Policy is written but not enabled, because it cannot be
+# tested from this folder and a wrong one breaks the chat widget silently.
+# The site needs exactly these allowances:
+#   - one inline <script> on /contact.html (form validation) -> 'unsafe-inline'
+#   - the chat widget at chatbot-widget-0of.pages.dev
+#   - connect-src to chatbot-api.weblyftt.workers.dev for the widget's replies
+#   - the contact form posts to script.google.com
+#   - img-src data: is not currently used and can be dropped if nothing needs it
+# To turn it on: uncomment the line below, load /contact.html and submit the
+# form, open the widget and send a message, and watch the browser console for
+# CSP violations before deploying.
+#  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://chatbot-widget-0of.pages.dev; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://chatbot-api.weblyftt.workers.dev https://chatbot-widget-0of.pages.dev; form-action 'self' https://script.google.com; frame-ancestors 'self'; base-uri 'self'
