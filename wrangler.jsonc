@@ -1,6 +1,6 @@
 {
   "name": "site-weblyft-design",
-  "compatibility_date": "2026-11-19",
+  "compatibility_date": "2026-11-18",
   "main": "worker.js",
   "run_worker_first": true,
   "assets": {
