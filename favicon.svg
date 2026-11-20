@@ -1,4 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Weblyft Design">
-  <rect width="100" height="100" fill="#a2371f"/>
-  <path d="M18 28h11l7 27 7-27h9l7 27 7-27h11l-12 44H53l-4-16-4 16H30z" fill="#f1ece1"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Weblyft Design">
+  <title>Weblyft Design mark</title>
+  <rect width="512" height="512" fill="#15120d"/>
+  <path d="M116 168 L182 330 L248 206 L314 330 L390 118" fill="none" stroke="#f3efe4" stroke-width="56"
+        stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="8"/>
 </svg>
